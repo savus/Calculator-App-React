@@ -1,5 +1,6 @@
 :root {
-  --size-button: 0.365rem;
+  --size-button: 6rem;
+  --size-text-standard: 2rem;
 }
 
 *,
@@ -12,10 +13,17 @@ body {
   font-size: 16px;
   font-family: Arial, Helvetica, sans-serif;
   background: linear-gradient(to right, #0385a5, #2fe4d5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 button {
   border: none;
   outline: none;
   background-color: transparent;
+}
+
+.span-two {
+  grid-column: span 2;
 }

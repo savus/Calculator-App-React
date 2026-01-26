@@ -1,9 +1,13 @@
 import { DigitButton } from "./DigitButton";
-
+import "../css/calculator.css";
 export const Calculator = () => {
   return (
     <div className="calculator">
-      <DigitButton digit={"AC"} />
+      <div className="output">
+        <div className="previous-operand">1234 *</div>
+        <div className="current-operand">1234</div>
+      </div>
+      <button className="span-two">AC</button>
       <DigitButton digit={"DEL"} />
       <DigitButton digit={"/"} />
       <DigitButton digit={"9"} />
@@ -20,7 +24,7 @@ export const Calculator = () => {
       <DigitButton digit={"-"} />
       <DigitButton digit={"0"} />
       <DigitButton digit={"."} />
-      <DigitButton digit={"="} />
+      <button className="span-two">=</button>
     </div>
   );
 };
