@@ -1,0 +1,21 @@
+:root {
+  --size-button: 0.365rem;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+body {
+  font-size: 16px;
+  font-family: Arial, Helvetica, sans-serif;
+  background: linear-gradient(to right, #0385a5, #2fe4d5);
+}
+
+button {
+  border: none;
+  outline: none;
+  background-color: transparent;
+}
