@@ -25,4 +25,7 @@ export type TCalc_Actions_Dispatch =
       payload: {
         operation: string;
       };
+    }
+  | {
+      type: TCalc_Actions["CLEAR"];
     };

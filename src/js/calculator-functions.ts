@@ -37,6 +37,15 @@ const handleOperation = (state: TCalc_State, operation: string) => {
   };
 };
 
+const clearCalculatorValues = (state: TCalc_State) => {
+  return {
+    ...state,
+    currentOperand: "",
+    operation: "",
+    previousOperand: "",
+  };
+};
+
 const evaluate = ({
   currentOperand,
   operation,
@@ -77,5 +86,7 @@ export const reducer = (state: TCalc_State, action: TCalc_Actions_Dispatch) => {
       return addDigit(state, action.payload.digit);
     case CALC_ACTIONS.CHOOSE_OPERATION:
       return handleOperation(state, action.payload.operation);
+    case CALC_ACTIONS.CLEAR:
+      clearCalculatorValues(state);
   }
 };
