@@ -12,6 +12,31 @@ const addDigit = (state: TCalc_State, digit: string) => {
   };
 };
 
+const handleOperation = (state: TCalc_State, operation: string) => {
+  //previous operand and current operand null
+  if (state.currentOperand === "" && state.previousOperand == "") return state;
+
+  //previous operand is not null, change operation
+  if (state.currentOperand === "") return { ...state, operation: operation };
+
+  //currentOperand is not null, move to previousOperand with operation
+  if (state.previousOperand === "")
+    return {
+      ...state,
+      previousOperand: state.currentOperand,
+      currentOperand: "",
+      operation: operation,
+    };
+
+  //if both current and previous operands are not null, evaluate answer into previous operand
+  return {
+    ...state,
+    currentOperand: "",
+    previousOperand: evaluate(state),
+    operation: operation,
+  };
+};
+
 const evaluate = ({
   currentOperand,
   operation,
@@ -51,31 +76,6 @@ export const reducer = (state: TCalc_State, action: TCalc_Actions_Dispatch) => {
     case CALC_ACTIONS.ADD_DIGIT:
       return addDigit(state, action.payload.digit);
     case CALC_ACTIONS.CHOOSE_OPERATION:
-      //prevop and curop null
-      if (state.currentOperand === "" && state.previousOperand == "")
-        return state;
-
-      //previousOperand is not null, change operation
-      if (state.currentOperand === "")
-        return { ...state, operation: action.payload.operation };
-
-      //currentOperand is not null, move to previousOperand with operation
-      if (state.previousOperand === "")
-        return {
-          ...state,
-          previousOperand: state.currentOperand,
-          currentOperand: "",
-          operation: action.payload.operation,
-        };
-
-      //if both current and previous operands are not null, evaluate answer into current operand
-      return {
-        ...state,
-        currentOperand: evaluate(state),
-        previousOperand: "",
-        operation: "",
-      };
+      return handleOperation(state, action.payload.operation);
   }
-
-  return state;
 };

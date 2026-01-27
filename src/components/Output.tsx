@@ -1,11 +1,9 @@
+import type { TCalc_State } from "../js/types";
+
 export const Output = ({
-  previousOperand,
-  operation,
-  currentOperand,
+  state: { currentOperand, operation, previousOperand },
 }: {
-  previousOperand: string;
-  operation: string;
-  currentOperand: string;
+  state: Partial<TCalc_State>;
 }) => {
   return (
     <div className="output">

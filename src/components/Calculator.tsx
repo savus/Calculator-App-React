@@ -4,6 +4,7 @@ import { useReducer } from "react";
 import { OperationButton } from "./OperationButton";
 import { reducer } from "../js/calculator-functions";
 import { Output } from "./Output";
+import { ClearButton } from "./ClearButton";
 
 export const Calculator = () => {
   const [{ currentOperand, operation, previousOperand }, dispatch] = useReducer(
@@ -18,13 +19,9 @@ export const Calculator = () => {
 
   return (
     <div className="calculator">
-      <Output
-        previousOperand={previousOperand}
-        currentOperand={currentOperand}
-        operation={operation}
-      />
+      <Output state={{ currentOperand, operation, previousOperand }} />
       <button className="span-two">AC</button>
-      <button>AC</button>
+      <ClearButton dispatch={dispatch} />
       <OperationButton operation={"/"} dispatch={dispatch} />
       <DigitButton digit={"9"} dispatch={dispatch} />
       <DigitButton digit={"8"} dispatch={dispatch} />
