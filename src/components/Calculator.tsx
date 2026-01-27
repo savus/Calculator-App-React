@@ -6,6 +6,7 @@ import { reducer } from "../js/calculator-functions";
 import { Output } from "./Output";
 import { ClearButton } from "./ClearButton";
 import { EvaluateButton } from "./EvaluateButton";
+import { CALC_ACTIONS } from "../js/constants";
 
 export const Calculator = () => {
   const [{ currentOperand, operation, previousOperand }, dispatch] = useReducer(
@@ -22,7 +23,13 @@ export const Calculator = () => {
     <div className="calculator">
       <Output state={{ currentOperand, operation, previousOperand }} />
       <ClearButton dispatch={dispatch} />
-      <button>DEL</button>
+      <button
+        onClick={() => {
+          dispatch({ type: CALC_ACTIONS.DELETE_DIGIT });
+        }}
+      >
+        DEL
+      </button>
       <OperationButton operation={"/"} dispatch={dispatch} />
       <DigitButton digit={"9"} dispatch={dispatch} />
       <DigitButton digit={"8"} dispatch={dispatch} />

@@ -51,11 +51,20 @@ const clearCalculatorValues = (state: TCalc_State) => {
 
 const handleEvaluationButton = (state: TCalc_State) => {
   if (
-    state.currentOperand === "" ||
-    state.previousOperand === "" ||
+    state.currentOperand === "" &&
+    state.previousOperand === "" &&
     state.operation === ""
   )
     return state;
+
+  if (state.currentOperand === "")
+    return {
+      ...state,
+      overwrite: false,
+      currentOperand: state.previousOperand,
+      previousOperand: "",
+      operation: "",
+    };
 
   return {
     ...state,
@@ -72,14 +81,15 @@ const evaluate = ({
   previousOperand,
 }: TCalc_State): string => {
   const parseInput = (input: string): number | null => {
-    if (input === "") return null;
-    return parseFloat(input);
+    const parsed = parseFloat(input);
+    if (Number.isNaN(parsed)) return null;
+    return parsed;
   };
 
   const prev = parseInput(previousOperand);
   const current = parseInput(currentOperand);
 
-  if (prev === null || current === null) return "";
+  if (prev === null || current === null) return "0";
 
   let computation = "";
   switch (operation) {
@@ -97,6 +107,7 @@ const evaluate = ({
       break;
   }
 
+  if (computation === "Infinity") return "Cannot divide by zero";
   return computation;
 };
 
@@ -104,6 +115,8 @@ export const reducer = (state: TCalc_State, action: TCalc_Actions_Dispatch) => {
   switch (action.type) {
     case CALC_ACTIONS.ADD_DIGIT:
       return addDigit(state, action.payload.digit);
+    case CALC_ACTIONS.DELETE_DIGIT:
+      return { ...state, currentOperand: state.currentOperand.slice(0, -1) };
     case CALC_ACTIONS.CHOOSE_OPERATION:
       return handleOperation(state, action.payload.operation);
     case CALC_ACTIONS.CLEAR:

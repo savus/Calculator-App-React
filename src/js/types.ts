@@ -27,6 +27,9 @@ export type TCalc_Actions_Dispatch =
       };
     }
   | {
+      type: TCalc_Actions["DELETE_DIGIT"];
+    }
+  | {
       type: TCalc_Actions["CLEAR"];
     }
   | {
