@@ -13,9 +13,16 @@ export type TCalc_Actions = {
   EVALUATE: "evaluate";
 };
 
-export type TCalc_Actions_Dispatch = {
-  type: TCalc_Actions["ADD_DIGIT"];
-  payload: {
-    digit: string;
-  };
-};
+export type TCalc_Actions_Dispatch =
+  | {
+      type: TCalc_Actions["ADD_DIGIT"];
+      payload: {
+        digit: string;
+      };
+    }
+  | {
+      type: TCalc_Actions["CHOOSE_OPERATION"];
+      payload: {
+        operation: string;
+      };
+    };
