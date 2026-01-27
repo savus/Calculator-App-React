@@ -28,4 +28,7 @@ export type TCalc_Actions_Dispatch =
     }
   | {
       type: TCalc_Actions["CLEAR"];
+    }
+  | {
+      type: TCalc_Actions["EVALUATE"];
     };

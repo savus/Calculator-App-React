@@ -2,6 +2,9 @@ import { CALC_ACTIONS } from "./constants";
 import type { TCalc_Actions_Dispatch, TCalc_State } from "./types";
 
 const addDigit = (state: TCalc_State, digit: string) => {
+  if (state.overwrite)
+    return { ...state, currentOperand: digit, overwrite: false };
+
   if (digit === "0" && state.currentOperand === "0") return state;
 
   if (digit === "." && state.currentOperand.includes(".")) return state;
@@ -46,6 +49,23 @@ const clearCalculatorValues = (state: TCalc_State) => {
   };
 };
 
+const handleEvaluationButton = (state: TCalc_State) => {
+  if (
+    state.currentOperand === "" ||
+    state.previousOperand === "" ||
+    state.operation === ""
+  )
+    return state;
+
+  return {
+    ...state,
+    overwrite: true,
+    currentOperand: evaluate(state),
+    previousOperand: "",
+    operation: "",
+  };
+};
+
 const evaluate = ({
   currentOperand,
   operation,
@@ -87,6 +107,8 @@ export const reducer = (state: TCalc_State, action: TCalc_Actions_Dispatch) => {
     case CALC_ACTIONS.CHOOSE_OPERATION:
       return handleOperation(state, action.payload.operation);
     case CALC_ACTIONS.CLEAR:
-      clearCalculatorValues(state);
+      return clearCalculatorValues(state);
+    case CALC_ACTIONS.EVALUATE:
+      return handleEvaluationButton(state);
   }
 };
