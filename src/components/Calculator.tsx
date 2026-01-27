@@ -1,29 +1,12 @@
 import { DigitButton } from "./DigitButton";
 import "../css/calculator.css";
 import { useReducer } from "react";
-import type { TCalc_Actions_Dispatch, TCalc_State } from "../js/types";
-import { CALC_ACTIONS } from "../js/constants";
 import { OperationButton } from "./OperationButton";
+import { reducer } from "../js/calculator-functions";
+import { Output } from "./Output";
 
-const reducer = (state: TCalc_State, action: TCalc_Actions_Dispatch) => {
-  switch (action.type) {
-    case CALC_ACTIONS.ADD_DIGIT:
-      if (action.payload.digit === "0" && state.currentOperand === "0")
-        return state;
-
-      if (action.payload.digit === "." && state.currentOperand.includes("."))
-        return state;
-
-      return {
-        ...state,
-        currentOperand: `${state.currentOperand}${action.payload.digit}`,
-      };
-  }
-
-  return state;
-};
 export const Calculator = () => {
-  const [{ currentOperand, previousOperand, operation }, dispatch] = useReducer(
+  const [{ currentOperand, operation, previousOperand }, dispatch] = useReducer(
     reducer,
     {
       currentOperand: "",
@@ -35,13 +18,11 @@ export const Calculator = () => {
 
   return (
     <div className="calculator">
-      <div className="output">
-        <div className="previous-operand">
-          {previousOperand}
-          {operation}
-        </div>
-        <div className="current-operand">{currentOperand}</div>
-      </div>
+      <Output
+        previousOperand={previousOperand}
+        currentOperand={currentOperand}
+        operation={operation}
+      />
       <button className="span-two">AC</button>
       <button>AC</button>
       <OperationButton operation={"/"} dispatch={dispatch} />
