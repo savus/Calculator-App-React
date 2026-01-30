@@ -23,7 +23,7 @@ export type TCalc_Actions_Dispatch =
   | {
       type: TCalc_Actions["CHOOSE_OPERATION"];
       payload: {
-        operation: string;
+        digit: string;
       };
     }
   | {

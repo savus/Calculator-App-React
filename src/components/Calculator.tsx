@@ -1,7 +1,6 @@
 import { DigitButton } from "./DigitButton";
 import "../css/calculator.css";
 import { useReducer } from "react";
-import { OperationButton } from "./OperationButton";
 import { reducer } from "../js/calculator-functions";
 import { Output } from "./Output";
 import { ClearButton } from "./ClearButton";
@@ -30,21 +29,22 @@ export const Calculator = () => {
       >
         DEL
       </button>
-      <OperationButton operation={"/"} dispatch={dispatch} />
-      <DigitButton digit={"9"} dispatch={dispatch} />
-      <DigitButton digit={"8"} dispatch={dispatch} />
-      <DigitButton digit={"7"} dispatch={dispatch} />
-      <OperationButton operation={"*"} dispatch={dispatch} />
-      <DigitButton digit={"6"} dispatch={dispatch} />
-      <DigitButton digit={"5"} dispatch={dispatch} />
-      <DigitButton digit={"4"} dispatch={dispatch} />
-      <OperationButton operation={"+"} dispatch={dispatch} />
-      <DigitButton digit={"3"} dispatch={dispatch} />
-      <DigitButton digit={"2"} dispatch={dispatch} />
-      <DigitButton digit={"1"} dispatch={dispatch} />
-      <OperationButton operation={"-"} dispatch={dispatch} />
-      <DigitButton digit={"0"} dispatch={dispatch} />
-      <DigitButton digit={"."} dispatch={dispatch} />
+
+      <DigitButton type="choose-operation" digit={"/"} dispatch={dispatch} />
+      <DigitButton type="add-digit" digit={"9"} dispatch={dispatch} />
+      <DigitButton type="add-digit" digit={"8"} dispatch={dispatch} />
+      <DigitButton type="add-digit" digit={"7"} dispatch={dispatch} />
+      <DigitButton type="choose-operation" digit={"*"} dispatch={dispatch} />
+      <DigitButton type="add-digit" digit={"6"} dispatch={dispatch} />
+      <DigitButton type="add-digit" digit={"5"} dispatch={dispatch} />
+      <DigitButton type="add-digit" digit={"4"} dispatch={dispatch} />
+      <DigitButton type="choose-operation" digit={"+"} dispatch={dispatch} />
+      <DigitButton type="add-digit" digit={"3"} dispatch={dispatch} />
+      <DigitButton type="add-digit" digit={"2"} dispatch={dispatch} />
+      <DigitButton type="add-digit" digit={"1"} dispatch={dispatch} />
+      <DigitButton type="choose-operation" digit={"-"} dispatch={dispatch} />
+      <DigitButton type="add-digit" digit={"0"} dispatch={dispatch} />
+      <DigitButton type="add-digit" digit={"."} dispatch={dispatch} />
       <EvaluateButton dispatch={dispatch} />
     </div>
   );

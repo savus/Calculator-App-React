@@ -15,12 +15,12 @@ const addDigit = (state: TCalc_State, digit: string) => {
   };
 };
 
-const handleOperation = (state: TCalc_State, operation: string) => {
+const handleOperation = (state: TCalc_State, digit: string) => {
   //previous operand and current operand null
   if (state.currentOperand === "" && state.previousOperand == "") return state;
 
   //previous operand is not null, change operation
-  if (state.currentOperand === "") return { ...state, operation: operation };
+  if (state.currentOperand === "") return { ...state, operation: digit };
 
   //currentOperand is not null, move to previousOperand with operation
   if (state.previousOperand === "")
@@ -28,7 +28,7 @@ const handleOperation = (state: TCalc_State, operation: string) => {
       ...state,
       previousOperand: state.currentOperand,
       currentOperand: "",
-      operation: operation,
+      operation: digit,
     };
 
   //if both current and previous operands are not null, evaluate answer into previous operand
@@ -36,7 +36,7 @@ const handleOperation = (state: TCalc_State, operation: string) => {
     ...state,
     currentOperand: "",
     previousOperand: evaluate(state),
-    operation: operation,
+    operation: digit,
   };
 };
 
@@ -118,7 +118,7 @@ export const reducer = (state: TCalc_State, action: TCalc_Actions_Dispatch) => {
     case CALC_ACTIONS.DELETE_DIGIT:
       return { ...state, currentOperand: state.currentOperand.slice(0, -1) };
     case CALC_ACTIONS.CHOOSE_OPERATION:
-      return handleOperation(state, action.payload.operation);
+      return handleOperation(state, action.payload.digit);
     case CALC_ACTIONS.CLEAR:
       return clearCalculatorValues(state);
     case CALC_ACTIONS.EVALUATE:
