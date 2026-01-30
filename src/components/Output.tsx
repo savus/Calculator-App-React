@@ -1,17 +1,18 @@
 import type { TCalc_State } from "../js/types";
 
 export const Output = ({
-  state: { currentOperand, operation, previousOperand },
+  state: { rightOperand, operation, leftOperand, total },
 }: {
   state: Partial<TCalc_State>;
 }) => {
   return (
     <div className="output">
-      <div className="previous-operand">
-        {previousOperand}
+      <div className="left-operand">
+        {leftOperand}
         {operation}
+        {operation === "=" ? `= ${rightOperand}` : rightOperand}
       </div>
-      <div className="current-operand">{currentOperand}</div>
+      <div className="total">{total}</div>
     </div>
   );
 };

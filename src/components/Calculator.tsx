@@ -1,35 +1,29 @@
-import { DigitButton } from "./DigitButton";
 import "../css/calculator.css";
+import { DigitButton } from "./DigitButton";
 import { useReducer } from "react";
 import { reducer } from "../js/calculator-functions";
 import { Output } from "./Output";
-import { ClearButton } from "./ClearButton";
-import { EvaluateButton } from "./EvaluateButton";
-import { CALC_ACTIONS } from "../js/constants";
 
 export const Calculator = () => {
-  const [{ currentOperand, operation, previousOperand }, dispatch] = useReducer(
-    reducer,
-    {
-      currentOperand: "",
-      previousOperand: "",
+  const [{ rightOperand, operation, leftOperand, total }, dispatch] =
+    useReducer(reducer, {
+      rightOperand: "",
+      leftOperand: "",
+      total: "",
       operation: "",
       overwrite: false,
-    },
-  );
+    });
 
   return (
     <div className="calculator">
-      <Output state={{ currentOperand, operation, previousOperand }} />
-      <ClearButton dispatch={dispatch} />
-      <button
-        onClick={() => {
-          dispatch({ type: CALC_ACTIONS.DELETE_DIGIT });
-        }}
-      >
-        DEL
-      </button>
-
+      <Output state={{ rightOperand, operation, leftOperand, total }} />
+      <DigitButton
+        className="span-two"
+        type="clear"
+        digit="AC"
+        dispatch={dispatch}
+      />
+      <DigitButton type="delete-digit" digit="DEL" dispatch={dispatch} />
       <DigitButton type="choose-operation" digit={"/"} dispatch={dispatch} />
       <DigitButton type="add-digit" digit={"9"} dispatch={dispatch} />
       <DigitButton type="add-digit" digit={"8"} dispatch={dispatch} />
@@ -45,7 +39,12 @@ export const Calculator = () => {
       <DigitButton type="choose-operation" digit={"-"} dispatch={dispatch} />
       <DigitButton type="add-digit" digit={"0"} dispatch={dispatch} />
       <DigitButton type="add-digit" digit={"."} dispatch={dispatch} />
-      <EvaluateButton dispatch={dispatch} />
+      <DigitButton
+        className="span-two"
+        type="evaluate"
+        digit="="
+        dispatch={dispatch}
+      />
     </div>
   );
 };

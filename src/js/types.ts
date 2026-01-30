@@ -1,7 +1,8 @@
 export type TCalc_State = {
-  currentOperand: string;
-  previousOperand: string;
+  rightOperand: string;
+  leftOperand: string;
   operation: string;
+  total: string;
   overwrite: boolean;
 };
 
