@@ -19,11 +19,11 @@
   letter-spacing: 1.7px;
 }
 
-.calculator .output .left-operand {
+.calculator .output .previous-operand {
   color: rgba(255, 255, 255, 0.6);
 }
 
-.calculator .output .total {
+.calculator .output .current-operand {
   color: rgba(255, 255, 255, 0.9);
 }
 

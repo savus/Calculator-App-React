@@ -5,18 +5,19 @@ import { reducer } from "../js/calculator-functions";
 import { Output } from "./Output";
 
 export const Calculator = () => {
-  const [{ rightOperand, operation, leftOperand, total }, dispatch] =
-    useReducer(reducer, {
-      rightOperand: "",
-      leftOperand: "",
-      total: "",
+  const [{ currentOperand, operation, previousOperand }, dispatch] = useReducer(
+    reducer,
+    {
+      currentOperand: "",
+      previousOperand: "",
       operation: "",
       overwrite: false,
-    });
+    },
+  );
 
   return (
     <div className="calculator">
-      <Output state={{ rightOperand, operation, leftOperand, total }} />
+      <Output state={{ currentOperand, operation, previousOperand }} />
       <DigitButton
         className="span-two"
         type="clear"
